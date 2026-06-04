@@ -59,3 +59,25 @@
 .post-card__score {
   color: var(--color-primary);
 }
+
+/* Comments toggle button */
+.post-card__comments {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 12px;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.post-card__comments:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+/* Expanded comments area below a post card */
+.post-card__comments-section:not(:empty) {
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-border);
+}
