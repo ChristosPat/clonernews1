@@ -37,7 +37,7 @@ async function checkForUpdates() {
     const newItems = await getItems(limited);
 
     newItems
-      .filter(item => item && !item.deleted && !item.dead)
+      .filter(item => item && !item.deleted && !item.dead && item.title)
       .forEach(item => {
         const li = document.createElement('li');
         li.className = 'live-item';
