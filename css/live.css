@@ -1,0 +1,72 @@
+/* Styles for the live updates section on the right side of the page */
+
+#live-section {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--spacing-md);
+  align-self: flex-start;
+  position: sticky;
+  top: var(--spacing-md);
+}
+
+/* Section title row with the pulsing live indicator */
+.live-section__header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Pulsing orange dot to indicate live status */
+.live-section__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+/* Last updated timestamp */
+#live-status {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-sm);
+}
+
+/* List of live items */
+#live-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.live-item {
+  padding: var(--spacing-xs) 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 12px;
+}
+
+.live-item:last-child {
+  border-bottom: none;
+}
+
+.live-item__title {
+  display: block;
+  color: var(--color-text);
+  font-weight: 500;
+  margin-bottom: 2px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.live-item__time {
+  color: var(--color-text-muted);
+  font-size: 11px;
+}
