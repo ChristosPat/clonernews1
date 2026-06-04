@@ -2,6 +2,7 @@
 // Receives a post object from the API and returns a <li> DOM element
 
 import { timeAgo } from '../utils/time.js';
+import { renderComments } from './Comments.js';
 
 // Creates and returns a <li> element representing one post
 export function PostCard(post) {
@@ -14,7 +15,6 @@ export function PostCard(post) {
     ? `<a href="${post.url}" target="_blank" rel="noopener">${post.title}</a>`
     : `<span>${post.title}</span>`;
 
-  // Number of comments — polls and jobs may not have descendants
   const comments = post.descendants ?? 0;
 
   li.innerHTML = `
@@ -26,9 +26,23 @@ export function PostCard(post) {
       <span class="post-card__author">by ${post.by}</span>
       <span class="post-card__score">▲ ${post.score ?? 0}</span>
       <span class="post-card__time">${timeAgo(post.time)}</span>
-      <span class="post-card__comments">${comments} comments</span>
+      <button class="post-card__comments">${comments} comments</button>
     </div>
+    <div class="post-card__comments-section"></div>
   `;
+
+  const commentsBtn = li.querySelector('.post-card__comments');
+  const commentsSection = li.querySelector('.post-card__comments-section');
+  let open = false;
+
+  commentsBtn.addEventListener('click', () => {
+    open = !open;
+    if (open) {
+      renderComments(post, commentsSection);
+    } else {
+      commentsSection.innerHTML = '';
+    }
+  });
 
   return li;
 }
