@@ -1,21 +1,20 @@
 // Renders the post feed and handles lazy loading
 // Fetches 20 posts at a time — more are loaded when the user scrolls to the bottom or clicks "Load More"
 
-import { getNewStories } from '../api/stories.js';
 import { getItems } from '../api/items.js';
 import { PostCard } from './PostCard.js';
 import { debounce } from '../utils/debounce.js';
 
 const BATCH_SIZE = 20;
 
-let allIds = [];    // full list of IDs from the API (up to 500)
-let offset = 0;     // how many posts have been loaded so far
-let loading = false; // prevents multiple simultaneous loads
+let allIds = [];
+let offset = 0;
+let loading = false;
+let currentFilter = null;
 
 const list = document.getElementById('feed-list');
 const loadMoreBtn = document.getElementById('load-more');
 
-// Loads the next batch of posts and appends them to the feed
 async function loadMore() {
   if (loading || offset >= allIds.length) return;
   loading = true;
@@ -23,32 +22,44 @@ async function loadMore() {
   const batch = allIds.slice(offset, offset + BATCH_SIZE);
   const posts = await getItems(batch);
 
+  let added = 0;
   posts.forEach(post => {
     if (post && !post.deleted && !post.dead) {
-      list.appendChild(PostCard(post));
+      if (!currentFilter || post.type === currentFilter) {
+        list.appendChild(PostCard(post));
+        added++;
+      }
     }
   });
 
   offset += BATCH_SIZE;
   loading = false;
 
-  // Hide the "Load More" button if there are no more posts
   if (offset >= allIds.length) {
     loadMoreBtn.style.display = 'none';
+  } else if (added === 0) {
+    // No matching posts in this batch — keep loading
+    await loadMore();
   }
 }
 
-// Initialises the feed — fetches all IDs and loads the first batch
-export async function initFeed() {
-  allIds = await getNewStories();
+// Wires up button and scroll once — they always use current state
+loadMoreBtn.addEventListener('click', loadMore);
+window.addEventListener('scroll', debounce(() => {
+  const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 300;
+  if (nearBottom) loadMore();
+}, 200));
+
+// Resets the feed and loads posts from the given fetchIdsFn
+// filterType: 'story' | 'job' | 'poll' | null (show all)
+export async function initFeed(fetchIdsFn, filterType = null) {
+  allIds = [];
+  offset = 0;
+  loading = false;
+  currentFilter = filterType;
+  list.innerHTML = '';
+  loadMoreBtn.style.display = '';
+
+  allIds = await fetchIdsFn();
   await loadMore();
-
-  // Load more when the user clicks the button
-  loadMoreBtn.addEventListener('click', loadMore);
-
-  // Load more when the user scrolls near the bottom of the page
-  window.addEventListener('scroll', debounce(() => {
-    const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 300;
-    if (nearBottom) loadMore();
-  }, 200));
 }
