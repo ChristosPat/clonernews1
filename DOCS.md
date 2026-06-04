@@ -53,3 +53,17 @@ Each component receives data and returns a DOM element ready to display.
 | [Feed.js](docs/components/Feed.md) | Renders the post feed with lazy loading (20 posts at a time) |
 | [Comment.js](docs/components/Comment.md) | Renders a single comment with nested replies |
 | [Comments.js](docs/components/Comments.md) | Fetches and renders all comments for a post, newest to oldest |
+| [LiveSection.js](docs/components/LiveSection.md) | Polls for new content every 5 seconds and updates the live sidebar |
+
+### `css/` — Stylesheets
+
+See [css/overview.md](docs/css/overview.md) for the full variable reference and load order.
+
+| File | Description |
+|------|-------------|
+| [reset.css](docs/css/reset.md) | Removes inconsistent default styles across browsers |
+| [main.css](docs/css/main.md) | Global layout, colour variables, typography and responsive grid |
+| [feed.css](docs/css/feed.md) | Post feed list and "Load More" button |
+| [post.css](docs/css/post.md) | Individual post card appearance |
+| [comments.css](docs/css/comments.md) | Comments list and nested reply styles |
+| [live.css](docs/css/live.md) | Live updates sidebar with pulsing indicator |
