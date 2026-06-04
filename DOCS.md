@@ -42,3 +42,14 @@ General-purpose tools with no knowledge of HackerNews.
 | [time.js](docs/utils/time.md) | Convert a Unix timestamp to a relative string like "3 hours ago" |
 | [throttle.js](docs/utils/throttle.md) | Limit how often a function can run (used for API polling) |
 | [debounce.js](docs/utils/debounce.md) | Delay a function until activity stops (used for scroll events) |
+
+### `js/components/` — UI Components
+
+Each component receives data and returns a DOM element ready to display.
+
+| File | Description |
+|------|-------------|
+| [PostCard.js](docs/components/PostCard.md) | Renders a single post card (story, job or poll) |
+| [Feed.js](docs/components/Feed.md) | Renders the post feed with lazy loading (20 posts at a time) |
+| [Comment.js](docs/components/Comment.md) | Renders a single comment with nested replies |
+| [Comments.js](docs/components/Comments.md) | Fetches and renders all comments for a post, newest to oldest |
