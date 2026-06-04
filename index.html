@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClonerNews</title>
+  <link rel="icon" href="assets/favicon.ico" />
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/feed.css" />
+  <link rel="stylesheet" href="css/post.css" />
+  <link rel="stylesheet" href="css/comments.css" />
+  <link rel="stylesheet" href="css/live.css" />
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <a href="/">ClonerNews</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <main>
+      <section class="feed">
+        <nav class="feed-tabs">
+          <button class="feed-tabs__btn" data-tab="stories">Stories</button>
+          <button class="feed-tabs__btn" data-tab="jobs">Jobs</button>
+          <button class="feed-tabs__btn" data-tab="polls">Polls</button>
+        </nav>
+        <ul id="feed-list"></ul>
+        <button id="load-more">Load More</button>
+      </section>
+
+      <aside id="live-section">
+        <h2>Live Updates</h2>
+        <p id="live-status"></p>
+        <ul id="live-list"></ul>
+      </aside>
+    </main>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
