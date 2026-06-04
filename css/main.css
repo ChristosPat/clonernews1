@@ -1,0 +1,73 @@
+/* General layout, typography and colour variables for the whole app */
+
+:root {
+  --color-bg:         #f6f6ef;  /* HackerNews beige background */
+  --color-surface:    #ffffff;
+  --color-primary:    #ff6600;  /* HackerNews orange */
+  --color-text:       #1a1a1a;
+  --color-text-muted: #828282;
+  --color-border:     #e0e0e0;
+
+  --font-sans: system-ui, -apple-system, sans-serif;
+  --font-mono: 'Courier New', monospace;
+
+  --spacing-xs:  4px;
+  --spacing-sm:  8px;
+  --spacing-md:  16px;
+  --spacing-lg:  24px;
+  --spacing-xl:  40px;
+
+  --radius:      6px;
+  --max-width:   860px;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* Main page wrapper — centres content and adds side padding */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* Top navigation bar */
+header {
+  background-color: var(--color-primary);
+  padding: var(--spacing-sm) var(--spacing-md);
+}
+
+header a {
+  color: #000;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+/* Page layout — feed on the left, live section on the right */
+main {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-lg) var(--spacing-md);
+}
+
+/* Stack to single column on smaller screens */
+@media (max-width: 700px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Generic section title */
+h2 {
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-sm);
+}
